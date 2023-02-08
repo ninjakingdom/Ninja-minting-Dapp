@@ -10,7 +10,9 @@ import MintWidget from './MintWidget';
 import Whitelist from '../lib/Whitelist';
 import { toast } from 'react-toastify';
 
-const ContractAbi = require('../../../../smart-contract/artifacts/contracts/' + CollectionConfig.contractName + '.sol/' + CollectionConfig.contractName + '.json').abi;
+// const ContractAbi = require('../../../../smart-contract/artifacts/contracts/' + CollectionConfig.contractName + '.sol/' + CollectionConfig.contractName + '.json').abi;
+
+const ContractAbi = require('../../../../smart-contract/artifacts/contracts/NinjaTesting.sol/' + 'NinjaTesting.json').abi;
 
 interface Props {
 }
