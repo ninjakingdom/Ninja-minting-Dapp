@@ -1,7 +1,8 @@
 import React from 'react';
+import truncateEthAddress from 'truncate-eth-address'
 
 interface Props {
-  userAddress: string|null;
+  userAddress: string | null;
   totalSupply: number;
   maxSupply: number;
   isPaused: boolean;
@@ -23,27 +24,27 @@ export default class CollectionStatus extends React.Component<Props, State> {
     this.state = defaultState;
   }
 
-  private isSaleOpen(): boolean
-  {
+  // public walletAddress = this.props.userAddress;
+
+  private isSaleOpen(): boolean {
     return (this.props.isWhitelistMintEnabled || !this.props.isPaused) && !this.props.isSoldOut;
   }
 
   render() {
     return (
       <>
+        <div className="wallet-address">
+          <span className="label">Wallet address:</span> <br />
+          <span className="address">{this.props.userAddress?.toString().slice(0, 5)}...{this.props.userAddress?.toString().slice(-4)}</span>
+        </div>
         <div className="collection-status">
-          <div className="user-address">
-            <span className="label">Wallet address:</span>
-            <span className="address">{this.props.userAddress}</span>
-          </div>
-          
-          <div className="supply">
-            <span className="label">Supply</span>
-            {this.props.totalSupply}/{this.props.maxSupply}
+          <div className="supply-sale">
+            <span className="label">Supply: </span>
+            {Number(this.props.maxSupply.toString()) - Number(this.props.totalSupply.toString())} left
           </div>
 
-          <div className="current-sale">
-            <span className="label">Sale status</span>
+          <div className="supply-sale">
+            <span className="label">Sale status: </span>
             {this.isSaleOpen() ?
               <>
                 {this.props.isWhitelistMintEnabled ? 'Whitelist only' : 'Open'}

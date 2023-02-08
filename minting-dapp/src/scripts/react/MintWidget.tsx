@@ -66,20 +66,22 @@ export default class MintWidget extends React.Component<Props, State> {
       <>
         {this.canMint() ?
           <div className={`mint-widget ${this.props.loading ? 'animate-pulse saturate-0 pointer-events-none' : ''}`}>
-            <div className="preview">
+            {/* <div className="preview">
               <img src="/build/images/preview.png" alt="Collection preview" />
-            </div>
+            </div> */}
 
-            <div className="price">
-              <strong>Total price:</strong> {utils.formatEther(this.props.tokenPrice.mul(this.state.mintAmount))} {this.props.networkConfig.symbol}
-            </div>
+            <div className='price-controller'>
+              <div className="pricetag">
+                <strong>Total price:</strong> {utils.formatEther(this.props.tokenPrice.mul(this.state.mintAmount))} {this.props.networkConfig.symbol}
+              </div>
 
-            <div className="controls">
-              <button className="decrease" disabled={this.props.loading} onClick={() => this.decrementMintAmount()}>-</button>
-              <span className="mint-amount">{this.state.mintAmount}</span>
-              <button className="increase" disabled={this.props.loading} onClick={() => this.incrementMintAmount()}>+</button>
-              <button className="primary" disabled={this.props.loading} onClick={() => this.mint()}>Mint</button>
+              <div className="controls">
+                <button className="decrease" disabled={this.props.loading} onClick={() => this.decrementMintAmount()}>-</button>
+                <span className="mint-amount">{this.state.mintAmount}</span>
+                <button className="increase" disabled={this.props.loading} onClick={() => this.incrementMintAmount()}>+</button>
+              </div>
             </div>
+            <button className="mintbutton" disabled={this.props.loading} onClick={() => this.mint()}>Mint</button>
           </div>
           :
           <div className="cannot-mint">

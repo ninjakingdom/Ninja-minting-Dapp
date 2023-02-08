@@ -1,4 +1,4 @@
-import '../styles/main.scss';
+import '../styles/global.css';
 import 'react-toastify/dist/ReactToastify.css';
 
 import ReactDOM from 'react-dom';
@@ -13,11 +13,11 @@ if (document.title === '') {
 document.addEventListener('DOMContentLoaded', async () => {
   ReactDOM.render(<>
     <ToastContainer
-          position='top-left'
-          autoClose={5000}
-          closeOnClick={true}
-          pauseOnHover={true}
-          theme='light' />
+      position='top-left'
+      autoClose={5000}
+      closeOnClick={true}
+      pauseOnHover={true}
+      theme='light' />
   </>, document.getElementById('notifications'));
 
   ReactDOM.render(<>

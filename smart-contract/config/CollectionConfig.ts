@@ -9,25 +9,25 @@ const CollectionConfig: CollectionConfigInterface = {
   // The contract name can be updated using the following command:
   // yarn rename-contract NEW_CONTRACT_NAME
   // Please DO NOT change it manually!
-  contractName: 'YourNftToken',
-  tokenName: 'My NFT Token',
-  tokenSymbol: 'MNT',
-  hiddenMetadataUri: 'ipfs://__CID__/hidden.json',
-  maxSupply: 10000,
+  contractName: 'NinjaTesting',
+  tokenName: 'Ninja Testing',
+  tokenSymbol: 'NKT',
+  hiddenMetadataUri: 'ipfs://QmXiMt2a8WJxj4QRAQRehsRwjkbHUYiHuBSfqzbzmoVoDU/hidden.json',
+  maxSupply: 20,
   whitelistSale: {
-    price: 0.05,
-    maxMintAmountPerTx: 1,
-  },
-  preSale: {
-    price: 0.07,
+    price: 0.01,
     maxMintAmountPerTx: 2,
   },
-  publicSale: {
-    price: 0.09,
-    maxMintAmountPerTx: 5,
+  preSale: {
+    price: 0.02,
+    maxMintAmountPerTx: 3,
   },
-  contractAddress: null,
-  marketplaceIdentifier: 'my-nft-token',
+  publicSale: {
+    price: 0.02,
+    maxMintAmountPerTx: 3,
+  },
+  contractAddress: "0xe8EC1f935779C633cf7Bc714a22CB20Edc599C90",
+  marketplaceIdentifier: 'ninjakingdom-token',
   marketplaceConfig: Marketplaces.openSea,
   whitelistAddresses,
 };

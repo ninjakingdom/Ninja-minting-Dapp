@@ -8,7 +8,7 @@
     @apply flex flex-col;
     @apply px-4 py-6;
     @apply rounded-lg;
-    
+
     @apply text-popups-txt;
     @apply bg-popups-bg;
     @apply shadow;
@@ -20,7 +20,7 @@
 
       &:not(:first-child)::before {
         content: '';
-        
+
         @apply block;
         @apply mx-auto my-3;
         @apply w-12;
@@ -46,7 +46,7 @@
         @apply rounded-lg;
         @apply mt-4;
         @apply p-3;
-        
+
         @apply text-wl_message-txt text-sm;
         @apply bg-wl_message-bg;
       }
@@ -81,7 +81,7 @@
   }
 
   .collection-status {
-    @apply grid sm:grid-cols-2 auto-rows-min;
+    @apply grid-cols-1 auto-rows-min;
     @apply rounded-lg;
 
     @apply font-mono;
@@ -89,7 +89,7 @@
     @apply bg-popups-bg;
     @apply shadow;
 
-    & > * {
+    &>* {
       @apply flex flex-col items-center;
       @apply px-6 py-4;
 
@@ -99,21 +99,22 @@
     }
 
     .user-address {
-      @apply sm:col-span-2;
+      @apply col-span-2;
       @apply overflow-hidden;
 
       @apply border-b border-popups-internal_border;
 
       .address {
         @apply w-full;
-        
+
         @apply font-semibold;
         @apply truncate;
         @apply text-center;
       }
     }
 
-    .supply, .current-sale {
+    .supply,
+    .current-sale {
       .label {
         @apply block;
 
@@ -121,12 +122,14 @@
       }
 
       &.supply {
-        @apply border-b sm:border-b-0 sm:border-r border-popups-internal_border;
+        @apply border-b border-r border-popups-internal_border;
       }
     }
   }
 
-  .cannot-mint, .not-mainnet, .collection-sold-out {
+  .cannot-mint,
+  .not-mainnet,
+  .collection-sold-out {
     @apply rounded-lg;
     @apply px-6 py-4;
 
@@ -175,11 +178,11 @@
       @apply p-8;
 
       @apply bg-token_preview;
-      
+
       img {
         @apply m-auto;
         @apply max-h-52;
-        
+
         filter: drop-shadow(1px 1px 2px rgba(0, 0, 0, 0.4));
       }
     }
@@ -188,7 +191,7 @@
       @apply px-6 py-4;
     }
 
-    & > * {
+    &>* {
       @apply w-full;
 
       &:not(:last-child) {
@@ -199,12 +202,13 @@
     .controls {
       @apply flex items-stretch;
 
-      & > * {
+      &>* {
         @apply rounded-none;
         @apply border-0;
       }
 
-      .decrease, .mint-amount {
+      .decrease,
+      .mint-amount {
         @apply border-r border-popups-internal_border;
       }
 
