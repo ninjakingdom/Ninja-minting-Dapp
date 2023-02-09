@@ -6,8 +6,14 @@ import "erc721a/contracts/extensions/ERC721AQueryable.sol";
 import "@openzeppelin/contracts/access/Ownable.sol";
 import "@openzeppelin/contracts/utils/cryptography/MerkleProof.sol";
 import "@openzeppelin/contracts/security/ReentrancyGuard.sol";
+import "@openzeppelin/contracts/token/common/ERC2981.sol";
 
-contract NinjaTesting is ERC721AQueryable, Ownable, ReentrancyGuard {
+contract TheNinjaKingdom is
+    ERC721AQueryable,
+    ERC2981,
+    Ownable,
+    ReentrancyGuard
+{
     using Strings for uint256;
 
     bytes32 public merkleRoot;
@@ -32,8 +38,10 @@ contract NinjaTesting is ERC721AQueryable, Ownable, ReentrancyGuard {
         uint256 _cost,
         uint256 _maxSupply,
         uint256 _maxMintAmountPerTx,
+        uint96 _royaltyFeesInBips,
         string memory _hiddenMetadataUri
     ) ERC721A(_tokenName, _tokenSymbol) {
+        setRoyaltyInfo(owner(), _royaltyFeesInBips);
         setCost(_cost);
         maxSupply = _maxSupply;
         setMaxMintAmountPerTx(_maxMintAmountPerTx);
@@ -61,6 +69,25 @@ contract NinjaTesting is ERC721AQueryable, Ownable, ReentrancyGuard {
         _;
     }
 
+    function supportsInterface(bytes4 interfaceId)
+        public
+        view
+        virtual
+        override(ERC721A, ERC2981)
+        returns (bool)
+    {
+        return super.supportsInterface(interfaceId);
+    }
+
+    function setRoyaltyInfo(address _receiver, uint96 _royaltyFeesInBips)
+        public
+        onlyOwner
+    {
+        _setDefaultRoyalty(_receiver, _royaltyFeesInBips);
+    }
+
+    // The whitelistMint function is a smart contract function that allows a user to mint a specified amount of tokens,
+    // amount of tokens, specified amount of tokens, given that they meet certain requirements.
     function whitelistMint(uint256 _mintAmount, bytes32[] calldata _merkleProof)
         public
         payable
@@ -182,6 +209,7 @@ contract NinjaTesting is ERC721AQueryable, Ownable, ReentrancyGuard {
         whitelistMintEnabled = _state;
     }
 
+    // The withdraw function is a smart contract function that allows the owner to withdraw the balance of the contract to their own address.
     function withdraw() public onlyOwner nonReentrant {
         (bool os, ) = payable(owner()).call{value: address(this).balance}("");
         require(os);
