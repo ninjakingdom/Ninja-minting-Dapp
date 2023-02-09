@@ -178,18 +178,20 @@ export default class Dapp extends React.Component<Props, State> {
     return (
       <>
         <div className='bgContainer'>
-          <video
-            autoPlay
-            loop
-            muted
-            playsInline
-            className='bg'
-          >
-            <source
-              // eslint-disable-next-line max-len
-              src="MintFPage.mp4"
-              type="video/mp4" />
-          </video>
+          <div className='video-container'>
+            <video
+              autoPlay
+              loop
+              muted
+              playsInline
+              className='bg'
+            >
+              <source
+                // eslint-disable-next-line max-len
+                src="MintFPage.mp4"
+                type="video/mp4" />
+            </video>
+          </div>
           {/* <img src='background.png' className='bg' /> */}
           <img src='logo.png' className='logo' />
           {this.isNotMainnet() ?

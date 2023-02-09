@@ -11,15 +11,27 @@ body {
 }
 
 .bgContainer {
+  position: absolute;
+  top: 0;
+  bottom: 0;
   width: 100%;
   height: 100%;
   overflow: hidden;
 }
 
 .bg {
+  /* Make video to at least 100% wide and tall */
+  min-width: 100%;
+  min-height: 100%;
+
+  width: auto;
+  height: auto;
+
+  /* Center the video */
   position: absolute;
-  max-height: 100%;
-  object-fit: cover;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 }
 
 .logo {
