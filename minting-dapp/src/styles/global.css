@@ -24,34 +24,79 @@ body {
   min-width: 100%;
   min-height: 100%;
 
-  width: auto;
+  width: 100%;
   height: auto;
+
+  object-fit: cover;
 
   /* Center the video */
   position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
+  transform: scale(1, );
 }
 
 .logo {
   position: absolute;
+  flex: content;
   top: 2%;
-  left: 2%;
-  width: 150px;
+  left: 3%;
+  width: 200px
 }
 
-.connectbuttton {
+.NL-mint {
   position: absolute;
-  top: 5%;
-  right: 5%;
-  background-color: red;
+  flex: content;
+  top: 30%;
+  left: 10%;
+  color: white;
+  font-size: 20px;
+  font-family: 'Racing Sans One';
+}
+
+.readyninja {
+  position: absolute;
+  width: 100%;
+  top: 55%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+  color: white;
+  font-size: 55px;
+  font-family: 'Racing Sans One';
+}
+
+.connect-wallet {
+  position: absolute;
+  top: 72%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  justify-content: center;
+  border-radius: 15px;
+  border-width: 2px;
+  border-style: solid;
+  border-color: white;
+  background-color: #E42222;
+  color: white;
+  text-align: center;
+  font-size: 20px;
+  font-family: 'Racing Sans One';
+  margin: auto;
+  padding: 5px;
+  width: 300px;
+  height: 50px;
+}
+
+.connect-wallet:hover {
+  background-color: #9C1B20;
 }
 
 .not-mainnet {
   position: absolute;
-  top: 5%;
-  left: 35%;
+  top: 10%;
+  left: 50%;
+  transform: translate(-50%, -50%);
   color: white;
   border-radius: 100px;
   background: orange;
@@ -78,18 +123,40 @@ body {
 
 .wallet-address {
   position: absolute;
-  top: 5%;
+  top: 3.5%;
   right: 5%;
   border-radius: 50px;
-  background: red;
+  border-width: 2px;
+  border-style: solid;
+  border-color: white;
   color: white;
-  opacity: 0.9;
   text-align: center;
-  font-size: 1.2vw;
+  font-size: 18px;
   margin: auto;
-  padding-top: 5px;
-  width: 15%;
-  height: 5%;
+  padding: 5px;
+  width: 150px;
+  height: 20px;
+}
+
+.WL-fail {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  justify-content: center;
+  border-radius: 15px;
+  border-width: 2px;
+  opacity: 0.9;
+  background-color: rgb(44, 44, 44);
+  text-align: center;
+  font-size: 18px;
+  padding: 50px;
+  width: 450px;
+  height: 45px;
+}
+
+.text {
+  color: white;
 }
 
 .supply-sale {
@@ -128,36 +195,111 @@ body {
   height: 7%;
 }
 
+.select {
+  position: absolute;
+  top: 32%;
+  left: 50%;
+  width: 100%;
+  transform: translate(-50%, -50%);
+  font-family: 'Racing Sans One';
+  color: white;
+  font-size: 55px;
+  text-align: center;
+}
+
 .pricetag {
-  margin-bottom: 5%;
+  position: absolute;
+  bottom: 8%;
+  left: 50%;
+  width: 100%;
+  transform: translate(-50%, -50%);
+  justify-content: center;
+  text-align: center;
+  font-size: 18px;
+  color: white;
+}
+
+.supply {
+  position: absolute;
+  bottom: 4%;
+  left: 50%;
+  width: 100%;
+  transform: translate(-50%, -50%);
+  justify-content: center;
+  text-align: center;
+  font-size: 18px;
+  color: white;
+}
+
+.mintOne {
+  position: absolute;
+  top: 55%;
+  left: 50%;
+  transform: translate(-130%, -50%);
+  height: 80px;
+  width: 80px;
+  background-color: white;
+  border-radius: 50%;
+  border-style: none;
+  display: inline-block;
+  color: black;
+  font-size: 30px;
+  font-family: 'Racing Sans One';
+}
+
+.mintTwo {
+  position: absolute;
+  top: 55%;
+  left: 50%;
+  transform: translate(30%, -50%);
+  height: 80px;
+  width: 80px;
+  background-color: white;
+  border-radius: 50%;
+  border-style: none;
+  display: inline-block;
+  color: black;
+  font-size: 30px;
+  font-family: 'Racing Sans One';
+}
+
+button:focus {
+  background-color: #E42222;
 }
 
 .mintbutton {
   position: absolute;
-  top: 60%;
-  left: 46%;
-  background: red;
-  opacity: 0.9;
-  font-size: 3vw;
+  top: 72%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  justify-content: center;
+  border-radius: 15px;
+  border-width: 2px;
+  border-style: solid;
+  border-color: white;
+  background-color: #E42222;
+  color: white;
   text-align: center;
+  font-size: 20px;
+  font-family: 'Racing Sans One';
   margin: auto;
-  padding: 20px;
-  width: 10%;
-  height: 10%;
+  padding: 5px;
+  width: 200px;
+  height: 50px;
 }
 
-.error {
+.mintbutton:hover {
+  background-color: #9C1B20;
+}
+
+.error-message {
   position: absolute;
-  top: 75%;
-  left: 35%;
-  background: white;
-  opacity: 0.9;
-  border-radius: 50px;
-  font-size: 1.5vw;
-  color: red;
+  top: 65%;
+  left: 50%;
+  width: 100%;
+  transform: translate(-50%, -50%);
+  justify-content: center;
+  color: white;
   text-align: center;
-  margin: auto;
-  padding: 20px;
-  width: 30%;
-  height: 10%;
+  font-size: 20px;
 }

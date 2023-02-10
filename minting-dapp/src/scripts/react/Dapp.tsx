@@ -10,9 +10,9 @@ import MintWidget from './MintWidget';
 import Whitelist from '../lib/Whitelist';
 import { toast } from 'react-toastify';
 
-// const ContractAbi = require('../../../../smart-contract/artifacts/contracts/' + CollectionConfig.contractName + '.sol/' + CollectionConfig.contractName + '.json').abi;
+const ContractAbi = require('../../../../smart-contract/artifacts/contracts/' + CollectionConfig.contractName + '.sol/' + CollectionConfig.contractName + '.json').abi;
 
-const ContractAbi = require('../../../../smart-contract/artifacts/contracts/NinjaTesting.sol/' + 'NinjaTesting.json').abi;
+// const ContractAbi = require('../../../../smart-contract/artifacts/contracts/NinjaTesting.sol/' + 'NinjaTesting.json').abi;
 
 interface Props {
 }
@@ -32,6 +32,7 @@ interface State {
   merkleProofManualAddress: string;
   merkleProofManualAddressFeedbackMessage: string | JSX.Element | null;
   errorMessage: string | JSX.Element | null;
+  errorMetaMessage: string | JSX.Element | null;
 }
 
 const defaultState: State = {
@@ -49,6 +50,7 @@ const defaultState: State = {
   merkleProofManualAddress: '',
   merkleProofManualAddressFeedbackMessage: null,
   errorMessage: null,
+  errorMetaMessage: null,
 };
 
 export default class Dapp extends React.Component<Props, State> {
@@ -68,13 +70,9 @@ export default class Dapp extends React.Component<Props, State> {
     const browserProvider = await detectEthereumProvider() as ExternalProvider;
 
     if (browserProvider?.isMetaMask !== true) {
-      this.setError(
+      this.setMetaError(
         <>
-          We were not able to detect <strong>MetaMask</strong>. We value <strong>privacy and security</strong> a lot so we limit the wallet options on the DAPP.<br />
-          <br />
-          But don't worry! <span className="emoji">😃</span> You can always interact with the smart-contract through <a href={this.generateContractUrl()} target="_blank">{this.state.networkConfig.blockExplorer.name}</a> and <strong>we do our best to provide you with the best user experience possible</strong>, even from there.<br />
-          <br />
-          {/* You can also get your <strong>Whitelist Proof</strong> manually, using the tool below. */}
+          Please install <strong>MetaMask</strong> in your web browser.
         </>,
       );
     }
@@ -165,43 +163,43 @@ export default class Dapp extends React.Component<Props, State> {
 
     navigator.clipboard.writeText(merkleProof);
 
-    this.setState({
-      merkleProofManualAddressFeedbackMessage:
-        <>
-          <strong>Congratulations!</strong> <span className="emoji">🎉</span><br />
-          Your Merkle Proof <strong>has been copied to the clipboard</strong>. You can paste it into <a href={this.generateContractUrl()} target="_blank">{this.state.networkConfig.blockExplorer.name}</a> to claim your tokens.
-        </>,
-    });
+    // this.setState({
+    //   merkleProofManualAddressFeedbackMessage:
+    //     <>
+    //       <strong>Congratulations!</strong> <span className="emoji">🎉</span><br />
+    //       Your Merkle Proof <strong>has been copied to the clipboard</strong>. You can paste it into <a href={this.generateContractUrl()} target="_blank">{this.state.networkConfig.blockExplorer.name}</a> to claim your tokens.
+    //     </>,
+    // });
   }
 
   render() {
     return (
       <>
         <div className='bgContainer'>
-          <div className='video-container'>
-            <video
-              autoPlay
-              loop
-              muted
-              playsInline
-              className='bg'
-            >
-              <source
-                // eslint-disable-next-line max-len
-                src="MintFPage.mp4"
-                type="video/mp4" />
-            </video>
-          </div>
-          {/* <img src='background.png' className='bg' /> */}
-          <img src='logo.png' className='logo' />
-          {this.isNotMainnet() ?
+          <video
+            autoPlay
+            loop
+            muted
+            playsInline
+            className='bg'
+          >
+            <source
+              // eslint-disable-next-line max-len
+              src="MintPage.mov"
+              type="video/mp4" />
+          </video>
+          <img className='logo' src='logo-NL.png' />
+          {/* {this.isNotMainnet() ?
             <div className="not-mainnet">
-              You are not connected to the main network. <br />
+              You are not connected to the Ethereum main network. <br />
               <span className="small">Current network: <strong>{this.state.network?.name}</strong></span>
             </div>
-            : null}
+            : null} */}
 
-          {this.state.errorMessage ? <div className="error"><p>{this.state.errorMessage}</p><button onClick={() => this.setError()}>Close</button></div> : null}
+          {this.state.errorMessage ? <div className="error-message"><p>{this.state.errorMessage}</p></div> : null}
+          {this.state.errorMetaMessage ? <div className="error-message"><strong>{this.state.errorMetaMessage}</strong></div> : null}
+
+          {/* <div className='close-button' onClick={() => this.setError()}>X</div> */}
 
           {this.isWalletConnected() ?
             <>
@@ -232,26 +230,31 @@ export default class Dapp extends React.Component<Props, State> {
                     />
                     :
                     <div className="collection-sold-out">
-                      <h2>Tokens have been <strong>sold out</strong>! <span className="emoji">🥳</span></h2>
+                      <h2>The Ninja's have been <strong>sold out</strong>!</h2>
 
-                      You can buy from our beloved holders on <a href={this.generateMarketplaceUrl()} target="_blank">{CollectionConfig.marketplaceConfig.name}</a>.
+                      You can visit our collection in <a href={this.generateMarketplaceUrl()} target="_blank">{CollectionConfig.marketplaceConfig.name}</a>.
                     </div>
                   }
                 </>
                 :
-                <div className="collection-not-ready">
-                  <svg className="spinner" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
-                    <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
-                    <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
-                  </svg> <br />
+                // <div className="collection-not-ready">
+                //   <svg className="spinner" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                //     <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
+                //     <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                //   </svg> <br />
 
-                  Loading collection data...
-                </div>
+                //   Loading collection data...
+                // </div>
+                null
               }
             </>
             :
-            <div className="no-wallet">
-              {!this.isWalletConnected() ? <button className="wallet-address" disabled={this.provider === undefined} onClick={() => this.connectWallet()}>Connect Wallet</button> : null}
+            <div>
+              {!this.isWalletConnected() && !this.state.errorMetaMessage
+                ? <>
+                  <div className='readyninja'> READY TO BE A NINJA? </div>
+                  <button className="connect-wallet" disabled={this.provider === undefined} onClick={() => this.connectWallet()}>CONNECT WALLET</button> </>
+                : null}
 
               {/* <div className="use-block-explorer">
                 Hey, looking for a <strong>super-safe experience</strong>? <span className="emoji">😃</span><br />
@@ -305,6 +308,31 @@ export default class Dapp extends React.Component<Props, State> {
     });
   }
 
+  private setMetaError(error: any = null): void {
+    let errorMetaMessage = 'Unknown error...';
+
+    if (null === error || typeof error === 'string') {
+      errorMetaMessage = error;
+    } else if (typeof error === 'object') {
+      // Support any type of error from the Web3 Provider...
+      if (error?.error?.message !== undefined) {
+        errorMetaMessage = error.error.message;
+      } else if (error?.data?.message !== undefined) {
+        errorMetaMessage = error.data.message;
+      } else if (error?.message !== undefined) {
+        errorMetaMessage = error.message;
+      } else if (React.isValidElement(error)) {
+        this.setState({ errorMetaMessage: error });
+
+        return;
+      }
+    }
+
+    this.setState({
+      errorMetaMessage: null === errorMetaMessage ? null : errorMetaMessage.charAt(0).toUpperCase() + errorMetaMessage.slice(1),
+    });
+  }
+
   private generateContractUrl(): string {
     return this.state.networkConfig.blockExplorer.generateContractUrl(CollectionConfig.contractAddress!);
   }
@@ -320,7 +348,6 @@ export default class Dapp extends React.Component<Props, State> {
   private async connectWallet(): Promise<void> {
     try {
       await this.provider.provider.request!({ method: 'eth_requestAccounts' });
-
       this.initWallet();
     } catch (e) {
       this.setError(e);
@@ -356,7 +383,7 @@ export default class Dapp extends React.Component<Props, State> {
     } else if (network.chainId === CollectionConfig.testnet.chainId) {
       networkConfig = CollectionConfig.testnet;
     } else {
-      this.setError('Unsupported network!');
+      this.setError('Please switch to the Ethereum Main Network!');
 
       return;
     }

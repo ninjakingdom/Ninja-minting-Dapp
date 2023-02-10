@@ -1,5 +1,5 @@
 import React from 'react';
-import truncateEthAddress from 'truncate-eth-address'
+import Whitelist from '../lib/Whitelist';
 
 interface Props {
   userAddress: string | null;
@@ -17,6 +17,8 @@ interface State {
 const defaultState: State = {
 };
 
+
+
 export default class CollectionStatus extends React.Component<Props, State> {
   constructor(props: Props) {
     super(props);
@@ -24,37 +26,38 @@ export default class CollectionStatus extends React.Component<Props, State> {
     this.state = defaultState;
   }
 
-  // public walletAddress = this.props.userAddress;
-
   private isSaleOpen(): boolean {
     return (this.props.isWhitelistMintEnabled || !this.props.isPaused) && !this.props.isSoldOut;
   }
+
 
   render() {
     return (
       <>
         <div className="wallet-address">
-          <span className="label">Wallet address:</span> <br />
           <span className="address">{this.props.userAddress?.toString().slice(0, 5)}...{this.props.userAddress?.toString().slice(-4)}</span>
         </div>
-        <div className="collection-status">
-          <div className="supply-sale">
-            <span className="label">Supply: </span>
-            {Number(this.props.maxSupply.toString()) - Number(this.props.totalSupply.toString())} left
-          </div>
-
-          <div className="supply-sale">
-            <span className="label">Sale status: </span>
-            {this.isSaleOpen() ?
-              <>
-                {this.props.isWhitelistMintEnabled ? 'Whitelist only' : 'Open'}
-              </>
-              :
-              'Closed'
-            }
-          </div>
-        </div>
+        {this.props.isUserInWhitelist ?
+          <>
+            <h1 className='select'>SELECT THE NUMBER OF NINJAS TO MINT</h1>
+            <div className="supply">
+              <span className="label">REMAINING NINJAS: </span>
+              <span style={{ color: "#E42222" }}>{this.props.totalSupply.toString()}</span> / {this.props.maxSupply.toString()} SUPPLY
+            </div>
+          </>
+          :
+          null
+        }
+        {this.isSaleOpen() ?
+          <>
+            {this.props.isWhitelistMintEnabled && !this.props.isUserInWhitelist ? <h1 className='WL-fail'><strong className='text'>Oops! It seems like you are not on the Ninja List. Hope to see you at the General Mint Soon!</strong></h1> : null}
+          </>
+          :
+          null
+        }
       </>
     );
   }
 }
+
+

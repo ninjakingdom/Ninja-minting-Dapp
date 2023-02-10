@@ -39,15 +39,15 @@ export default class MintWidget extends React.Component<Props, State> {
     return this.props.isWhitelistMintEnabled && this.props.isUserInWhitelist;
   }
 
-  private incrementMintAmount(): void {
+  private mint2(): void {
     this.setState({
-      mintAmount: Math.min(this.props.maxMintAmountPerTx, this.state.mintAmount + 1),
+      mintAmount: 2,
     });
   }
 
-  private decrementMintAmount(): void {
+  private mint1(): void {
     this.setState({
-      mintAmount: Math.max(1, this.state.mintAmount - 1),
+      mintAmount: 1,
     });
   }
 
@@ -70,18 +70,14 @@ export default class MintWidget extends React.Component<Props, State> {
               <img src="/build/images/preview.png" alt="Collection preview" />
             </div> */}
 
-            <div className='price-controller'>
-              <div className="pricetag">
-                <strong>Total price:</strong> {utils.formatEther(this.props.tokenPrice.mul(this.state.mintAmount))} {this.props.networkConfig.symbol}
-              </div>
-
-              <div className="controls">
-                <button className="decrease" disabled={this.props.loading} onClick={() => this.decrementMintAmount()}>-</button>
-                <span className="mint-amount">{this.state.mintAmount}</span>
-                <button className="increase" disabled={this.props.loading} onClick={() => this.incrementMintAmount()}>+</button>
-              </div>
+            <div className="pricetag">
+              <strong>PRICE:</strong> {utils.formatEther(this.props.tokenPrice.mul(this.state.mintAmount))} ETH
             </div>
-            <button className="mintbutton" disabled={this.props.loading} onClick={() => this.mint()}>Mint</button>
+            <div className="controls">
+              <button tabIndex={1} className="mintOne" disabled={this.props.loading} onClick={() => this.mint1()}><a>1</a></button>
+              <button tabIndex={2} className="mintTwo" disabled={this.props.loading} onClick={() => this.mint2()}>2</button>
+            </div>
+            <button className="mintbutton" disabled={this.props.loading} onClick={() => this.mint()}>MINT {this.state.mintAmount} NINJA</button>
           </div>
           :
           <div className="cannot-mint">
