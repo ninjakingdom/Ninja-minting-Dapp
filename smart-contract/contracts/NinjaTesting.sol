@@ -8,12 +8,7 @@ import "@openzeppelin/contracts/utils/cryptography/MerkleProof.sol";
 import "@openzeppelin/contracts/security/ReentrancyGuard.sol";
 import "@openzeppelin/contracts/token/common/ERC2981.sol";
 
-contract TheNinjaKingdom is
-    ERC721AQueryable,
-    ERC2981,
-    Ownable,
-    ReentrancyGuard
-{
+contract NinjaTesting is ERC721AQueryable, ERC2981, Ownable, ReentrancyGuard {
     using Strings for uint256;
 
     bytes32 public merkleRoot;
