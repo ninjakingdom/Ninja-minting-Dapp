@@ -39,6 +39,12 @@ export default class MintWidget extends React.Component<Props, State> {
     return this.props.isWhitelistMintEnabled && this.props.isUserInWhitelist;
   }
 
+  private mint3(): void {
+    this.setState({
+      mintAmount: 3,
+    });
+  }
+
   private mint2(): void {
     this.setState({
       mintAmount: 2,
@@ -65,11 +71,8 @@ export default class MintWidget extends React.Component<Props, State> {
     return (
       <>
         {this.canMint() ?
-          <div className={`mint-widget ${this.props.loading ? 'animate-pulse saturate-0 pointer-events-none' : ''}`}>
-            {/* <div className="preview">
-              <img src="/build/images/preview.png" alt="Collection preview" />
-            </div> */}
-
+          <>
+            {/* <div className={`mint-widget ${this.props.loading ? 'animate-pulse saturate-0 pointer-events-none' : ''}`}> */}
             <div className="pricetag">
               <strong>PRICE:</strong> {utils.formatEther(this.props.tokenPrice.mul(this.state.mintAmount))} ETH
             </div>
@@ -78,7 +81,8 @@ export default class MintWidget extends React.Component<Props, State> {
               <button tabIndex={2} className="mintTwo" disabled={this.props.loading} onClick={() => this.mint2()}>2</button>
             </div>
             <button className="mintbutton" disabled={this.props.loading} onClick={() => this.mint()}>MINT {this.state.mintAmount} NINJA</button>
-          </div>
+            {/* </div> */}
+          </>
           :
           <div className="cannot-mint">
             <span className="emoji">⏳</span>

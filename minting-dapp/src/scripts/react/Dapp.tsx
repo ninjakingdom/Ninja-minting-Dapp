@@ -27,6 +27,7 @@ interface State {
   tokenPrice: BigNumber;
   isPaused: boolean;
   loading: boolean;
+  mintSuccess: boolean;
   isWhitelistMintEnabled: boolean;
   isUserInWhitelist: boolean;
   merkleProofManualAddress: string;
@@ -45,6 +46,7 @@ const defaultState: State = {
   tokenPrice: BigNumber.from(0),
   isPaused: true,
   loading: false,
+  mintSuccess: false,
   isWhitelistMintEnabled: false,
   isUserInWhitelist: false,
   merkleProofManualAddress: '',
@@ -86,23 +88,23 @@ export default class Dapp extends React.Component<Props, State> {
 
   async mintTokens(amount: number): Promise<void> {
     try {
-      this.setState({ loading: true });
       const transaction = await this.contract.mint(amount, { value: this.state.tokenPrice.mul(amount) });
+      this.setState({ loading: true });
 
-      toast.info(<>
-        Transaction sent! Please wait...<br />
-        <a href={this.generateTransactionUrl(transaction.hash)} target="_blank" rel="noopener">View on {this.state.networkConfig.blockExplorer.name}</a>
-      </>);
+      // toast.info(<>
+      //   Transaction sent! Please wait...<br />
+      //   <a href={this.generateTransactionUrl(transaction.hash)} target="_blank" rel="noopener">View on {this.state.networkConfig.blockExplorer.name}</a>
+      // </>);
 
       const receipt = await transaction.wait();
 
-      toast.success(<>
-        Success!<br />
-        <a href={this.generateTransactionUrl(receipt.transactionHash)} target="_blank" rel="noopener">View on {this.state.networkConfig.blockExplorer.name}</a>
-      </>);
+      // toast.success(<>
+      //   Success!<br />
+      //   <a href={this.generateTransactionUrl(receipt.transactionHash)} target="_blank" rel="noopener">View on {this.state.networkConfig.blockExplorer.name}</a>
+      // </>);
 
       this.refreshContractState();
-      this.setState({ loading: false });
+      this.setState({ mintSuccess: true });
     } catch (e) {
       this.setError(e);
       this.setState({ loading: false });
@@ -111,23 +113,23 @@ export default class Dapp extends React.Component<Props, State> {
 
   async whitelistMintTokens(amount: number): Promise<void> {
     try {
-      this.setState({ loading: true });
       const transaction = await this.contract.whitelistMint(amount, Whitelist.getProofForAddress(this.state.userAddress!), { value: this.state.tokenPrice.mul(amount) });
+      this.setState({ loading: true });
 
-      toast.info(<>
-        Transaction sent! Please wait...<br />
-        <a href={this.generateTransactionUrl(transaction.hash)} target="_blank" rel="noopener">View on {this.state.networkConfig.blockExplorer.name}</a>
-      </>);
+      // toast.info(<>
+      //   Transaction sent! Please wait...<br />
+      //   <a href={this.generateTransactionUrl(transaction.hash)} target="_blank" rel="noopener">View on {this.state.networkConfig.blockExplorer.name}</a>
+      // </>);
 
       const receipt = await transaction.wait();
 
-      toast.success(<>
-        Success!<br />
-        <a href={this.generateTransactionUrl(receipt.transactionHash)} target="_blank" rel="noopener">View on {this.state.networkConfig.blockExplorer.name}</a>
-      </>);
+      // toast.success(<>
+      //   Success!<br />
+      //   <a href={this.generateTransactionUrl(receipt.transactionHash)} target="_blank" rel="noopener">View on {this.state.networkConfig.blockExplorer.name}</a>
+      // </>);
 
       this.refreshContractState();
-      this.setState({ loading: false });
+      this.setState({ mintSuccess: true });
     } catch (e) {
       this.setError(e);
       this.setState({ loading: false });
@@ -162,14 +164,6 @@ export default class Dapp extends React.Component<Props, State> {
     }
 
     navigator.clipboard.writeText(merkleProof);
-
-    // this.setState({
-    //   merkleProofManualAddressFeedbackMessage:
-    //     <>
-    //       <strong>Congratulations!</strong> <span className="emoji">🎉</span><br />
-    //       Your Merkle Proof <strong>has been copied to the clipboard</strong>. You can paste it into <a href={this.generateContractUrl()} target="_blank">{this.state.networkConfig.blockExplorer.name}</a> to claim your tokens.
-    //     </>,
-    // });
   }
 
   render() {
@@ -189,14 +183,7 @@ export default class Dapp extends React.Component<Props, State> {
               type="video/mp4" />
           </video>
           <img className='logo' src='logo-NL.png' />
-          {/* {this.isNotMainnet() ?
-            <div className="not-mainnet">
-              You are not connected to the Ethereum main network. <br />
-              <span className="small">Current network: <strong>{this.state.network?.name}</strong></span>
-            </div>
-            : null} */}
 
-          {this.state.errorMessage ? <div className="error-message"><p>{this.state.errorMessage}</p></div> : null}
           {this.state.errorMetaMessage ? <div className="error-message"><strong>{this.state.errorMetaMessage}</strong></div> : null}
 
           {/* <div className='close-button' onClick={() => this.setError()}>X</div> */}
@@ -205,46 +192,70 @@ export default class Dapp extends React.Component<Props, State> {
             <>
               {this.isContractReady() ?
                 <>
-                  <CollectionStatus
-                    userAddress={this.state.userAddress}
-                    maxSupply={this.state.maxSupply}
-                    totalSupply={this.state.totalSupply}
-                    isPaused={this.state.isPaused}
-                    isWhitelistMintEnabled={this.state.isWhitelistMintEnabled}
-                    isUserInWhitelist={this.state.isUserInWhitelist}
-                    isSoldOut={this.isSoldOut()}
-                  />
-                  {!this.isSoldOut() ?
-                    <MintWidget
-                      networkConfig={this.state.networkConfig}
-                      maxSupply={this.state.maxSupply}
-                      totalSupply={this.state.totalSupply}
-                      tokenPrice={this.state.tokenPrice}
-                      maxMintAmountPerTx={this.state.maxMintAmountPerTx}
-                      isPaused={this.state.isPaused}
-                      isWhitelistMintEnabled={this.state.isWhitelistMintEnabled}
-                      isUserInWhitelist={this.state.isUserInWhitelist}
-                      mintTokens={(mintAmount) => this.mintTokens(mintAmount)}
-                      whitelistMintTokens={(mintAmount) => this.whitelistMintTokens(mintAmount)}
-                      loading={this.state.loading}
-                    />
+                  {this.state.loading ?
+                    <>
+                      {this.state.mintSuccess ?
+                        <>
+                          <div className="wallet-address">
+                            <span className="address">{this.state.userAddress?.toString().slice(0, 5)}...{this.state.userAddress?.toString().slice(-4)}</span>
+                          </div>
+                          <h1 className='txn-success'>TRANSACTION WAS SUCCESSFUL</h1>
+                          <h1 className='congratz-msg'>
+                            CONGRATULATIONS!
+                            <br />
+                            WELCOME TO THE NINJA KINGDOM!
+                          </h1>
+                          <a className='ethscan'>VIEW ETHERSCAN</a>
+                          <a className='jonin' >CLAIM YOUR JŌNIN ROLE</a>
+                        </>
+                        :
+                        <>
+                          <div className="wallet-address">
+                            <span className="address">{this.state.userAddress?.toString().slice(0, 5)}...{this.state.userAddress?.toString().slice(-4)}</span>
+                          </div>
+                          <h1 className='select'>TRANSACTION IS PROCESSING...</h1>
+                          <h1 className='update-message'>UPDATING... DO NOT REFRESH THE BROWSER</h1>
+                          <a className='ethscan'>VIEW ETHERSCAN</a>
+                        </>
+                      }
+                    </>
                     :
-                    <div className="collection-sold-out">
-                      <h2>The Ninja's have been <strong>sold out</strong>!</h2>
+                    <>
+                      <CollectionStatus
+                        userAddress={this.state.userAddress}
+                        maxSupply={this.state.maxSupply}
+                        totalSupply={this.state.totalSupply}
+                        isPaused={this.state.isPaused}
+                        isWhitelistMintEnabled={this.state.isWhitelistMintEnabled}
+                        isUserInWhitelist={this.state.isUserInWhitelist}
+                        isSoldOut={this.isSoldOut()}
+                        errorMessage={this.state.errorMessage}
 
-                      You can visit our collection in <a href={this.generateMarketplaceUrl()} target="_blank">{CollectionConfig.marketplaceConfig.name}</a>.
-                    </div>
+                      />
+                      {!this.isSoldOut() ?
+                        <MintWidget
+                          networkConfig={this.state.networkConfig}
+                          maxSupply={this.state.maxSupply}
+                          totalSupply={this.state.totalSupply}
+                          tokenPrice={this.state.tokenPrice}
+                          maxMintAmountPerTx={this.state.maxMintAmountPerTx}
+                          isPaused={this.state.isPaused}
+                          isWhitelistMintEnabled={this.state.isWhitelistMintEnabled}
+                          isUserInWhitelist={this.state.isUserInWhitelist}
+                          mintTokens={(mintAmount) => this.mintTokens(mintAmount)}
+                          whitelistMintTokens={(mintAmount) => this.whitelistMintTokens(mintAmount)}
+                          loading={this.state.loading}
+                        />
+                        :
+                        <div className="WL-fail">
+                          <h2>The Ninja's have been <strong>sold out</strong>!</h2>
+                          <h3>You can visit our collection in <a href={this.generateMarketplaceUrl()} target="_blank">{CollectionConfig.marketplaceConfig.name}</a>.</h3>
+                        </div>
+                      }
+                    </>
                   }
                 </>
                 :
-                // <div className="collection-not-ready">
-                //   <svg className="spinner" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
-                //     <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
-                //     <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
-                //   </svg> <br />
-
-                //   Loading collection data...
-                // </div>
                 null
               }
             </>
@@ -254,27 +265,6 @@ export default class Dapp extends React.Component<Props, State> {
                 ? <>
                   <div className='readyninja'> READY TO BE A NINJA? </div>
                   <button className="connect-wallet" disabled={this.provider === undefined} onClick={() => this.connectWallet()}>CONNECT WALLET</button> </>
-                : null}
-
-              {/* <div className="use-block-explorer">
-                Hey, looking for a <strong>super-safe experience</strong>? <span className="emoji">😃</span><br />
-                You can interact with the smart-contract <strong>directly</strong> through <a href={this.generateContractUrl()} target="_blank">{this.state.networkConfig.blockExplorer.name}</a>, without even connecting your wallet to this DAPP! <span className="emoji">🚀</span><br />
-                <br />
-                Keep safe! <span className="emoji">❤️</span>
-              </div> */}
-
-              {!this.isWalletConnected() || this.state.isWhitelistMintEnabled ?
-                <div className="merkle-proof-manual-address">
-                  {/* <h2>Whitelist Proof</h2>
-                  <p>
-                    Anyone can generate the proof using any public address in the list, but <strong>only the owner of that address</strong> will be able to make a successful transaction by using it.
-                  </p>
-
-                  {this.state.merkleProofManualAddressFeedbackMessage ? <div className="feedback-message">{this.state.merkleProofManualAddressFeedbackMessage}</div> : null}
-
-                  <label htmlFor="merkle-proof-manual-address">Public address:</label>
-                  <input id="merkle-proof-manual-address" type="text" placeholder="0x000..." disabled={this.state.userAddress !== null} value={this.state.userAddress ?? this.state.merkleProofManualAddress} ref={(input) => this.merkleProofManualAddressInput = input!} onChange={() => { this.setState({ merkleProofManualAddress: this.merkleProofManualAddressInput.value }) }} /> <button onClick={() => this.copyMerkleProofToClipboard()}>Generate and copy to clipboard</button> */}
-                </div>
                 : null}
             </div>
           }
