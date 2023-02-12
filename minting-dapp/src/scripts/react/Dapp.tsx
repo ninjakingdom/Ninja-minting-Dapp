@@ -28,6 +28,8 @@ interface State {
   isPaused: boolean;
   loading: boolean;
   mintSuccess: boolean;
+  tnxHashes: string;
+  tnxHashReceipts: string;
   isWhitelistMintEnabled: boolean;
   isUserInWhitelist: boolean;
   merkleProofManualAddress: string;
@@ -47,6 +49,8 @@ const defaultState: State = {
   isPaused: true,
   loading: false,
   mintSuccess: false,
+  tnxHashes: '',
+  tnxHashReceipts: '',
   isWhitelistMintEnabled: false,
   isUserInWhitelist: false,
   merkleProofManualAddress: '',
@@ -96,12 +100,19 @@ export default class Dapp extends React.Component<Props, State> {
       //   <a href={this.generateTransactionUrl(transaction.hash)} target="_blank" rel="noopener">View on {this.state.networkConfig.blockExplorer.name}</a>
       // </>);
 
+      let tnxHash = this.generateTransactionUrl(transaction.hash).toString()
+
+      this.setState({ tnxHashes: tnxHash })
+
       const receipt = await transaction.wait();
 
       // toast.success(<>
       //   Success!<br />
       //   <a href={this.generateTransactionUrl(receipt.transactionHash)} target="_blank" rel="noopener">View on {this.state.networkConfig.blockExplorer.name}</a>
       // </>);
+
+      let tnxHashReceipt = this.generateTransactionUrl(receipt.transactionHash).toString()
+      this.setState({ tnxHashReceipts: tnxHashReceipt })
 
       this.refreshContractState();
       this.setState({ mintSuccess: true });
@@ -205,7 +216,7 @@ export default class Dapp extends React.Component<Props, State> {
                             <br />
                             WELCOME TO THE NINJA KINGDOM!
                           </h1>
-                          <a className='ethscan'>VIEW ETHERSCAN</a>
+                          <a className='ethscan' href={this.state.tnxHashReceipts} target="_blank" rel="noopener">VIEW ETHERSCAN</a>
                           <a className='jonin' >CLAIM YOUR JŌNIN ROLE</a>
                         </>
                         :
@@ -215,7 +226,7 @@ export default class Dapp extends React.Component<Props, State> {
                           </div>
                           <h1 className='select'>TRANSACTION IS PROCESSING...</h1>
                           <h1 className='update-message'>UPDATING... DO NOT REFRESH THE BROWSER</h1>
-                          <a className='ethscan'>VIEW ETHERSCAN</a>
+                          <a className='ethscan' href={this.state.tnxHashes} target="_blank" rel="noopener">VIEW ETHERSCAN</a>
                         </>
                       }
                     </>
