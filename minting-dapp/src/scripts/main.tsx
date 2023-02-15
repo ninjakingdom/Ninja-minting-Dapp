@@ -1,26 +1,17 @@
 import '../styles/global.css';
-import 'react-toastify/dist/ReactToastify.css';
-
 import ReactDOM from 'react-dom';
 import Dapp from './react/Dapp';
 import CollectionConfig from '../../../smart-contract/config/CollectionConfig';
-import { ToastContainer } from 'react-toastify';
+import CountDown from './react/CountDown';
 
 if (document.title === '') {
   document.title = CollectionConfig.tokenName;
 }
 
+
 document.addEventListener('DOMContentLoaded', async () => {
   ReactDOM.render(<>
-    <ToastContainer
-      position='top-left'
-      autoClose={5000}
-      closeOnClick={true}
-      pauseOnHover={true}
-      theme='dark' />
-  </>, document.getElementById('notifications'));
-
-  ReactDOM.render(<>
-    <Dapp />
+    <CountDown />
+    {/* <Dapp /> */}
   </>, document.getElementById('minting-dapp'));
 });

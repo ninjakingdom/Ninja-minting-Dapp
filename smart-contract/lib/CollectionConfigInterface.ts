@@ -17,8 +17,9 @@ export default interface CollectionConfigInterface {
   whitelistSale: SaleConfig;
   preSale: SaleConfig;
   publicSale: SaleConfig;
-  contractAddress: string|null;
+  contractAddress: string | null;
   marketplaceIdentifier: string;
   marketplaceConfig: MarketplaceConfigInterface;
   whitelistAddresses: string[];
+  royaltyFeesInBips: string;
 };

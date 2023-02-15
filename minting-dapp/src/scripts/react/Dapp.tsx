@@ -8,11 +8,10 @@ import NetworkConfigInterface from '../../../../smart-contract/lib/NetworkConfig
 import CollectionStatus from './CollectionStatus';
 import MintWidget from './MintWidget';
 import Whitelist from '../lib/Whitelist';
-import { toast } from 'react-toastify';
 
 // const ContractAbi = require('../../../../smart-contract/artifacts/contracts/' + CollectionConfig.contractName + '.sol/' + CollectionConfig.contractName + '.json').abi;
 
-const ContractAbi = require('../../../../smart-contract/artifacts/contracts/NinjaTesting.sol/' + 'NinjaTesting.json').abi;
+const ContractAbi = require('../../../../smart-contract/artifacts/contracts/TheNinjaKingdom.sol/' + 'TheNinjaKingdom.json').abi;
 
 interface Props {
 }
@@ -193,7 +192,10 @@ export default class Dapp extends React.Component<Props, State> {
               src="MintPage.mov"
               type="video/mp4" />
           </video>
-          <img className='logo' src='logo-NL.png' />
+          <a href='https://theninjakingdom.com' target="_blank" rel="noopener" >
+            <img className='logo' src='logo.png'></img>
+          </a>
+          <h1 className='NL-mint'>NINJA LIST MINT</h1>
 
           {this.state.errorMetaMessage ? <div className="error-message"><strong>{this.state.errorMetaMessage}</strong></div> : null}
 
