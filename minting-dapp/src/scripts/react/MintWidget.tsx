@@ -72,20 +72,20 @@ export default class MintWidget extends React.Component<Props, State> {
       <>
         {this.canMint() ?
           <>
-            {this.props.isUserInWhitelist ?
-              <>
-                <div className="pricetag">
-                  <strong>PRICE:</strong> {utils.formatEther(this.props.tokenPrice.mul(this.state.mintAmount))} ETH
-                </div>
-                <div className="controls">
-                  <button tabIndex={1} className="mintOne" disabled={this.props.loading} onClick={() => this.mint1()}><a>1</a></button>
-                  <button tabIndex={2} className="mintTwo" disabled={this.props.loading} onClick={() => this.mint2()}>2</button>
-                </div>
-                <button className="mintbutton" disabled={this.props.loading} onClick={() => this.mint()}>MINT {this.state.mintAmount} NINJA</button>
-              </>
+            {/* {this.props.isUserInWhitelist ?
+              <> */}
+            <div className="pricetag">
+              <strong>PRICE:</strong> {utils.formatEther(this.props.tokenPrice.mul(this.state.mintAmount))} ETH
+            </div>
+            <div className="controls">
+              <button tabIndex={1} className="mintOne" disabled={this.props.loading} onClick={() => this.mint1()}><a>1</a></button>
+              <button tabIndex={2} className="mintTwo" disabled={this.props.loading} onClick={() => this.mint2()}>2</button>
+            </div>
+            <button className="mintbutton" disabled={this.props.loading} onClick={() => this.mint()}>MINT {this.state.mintAmount} NINJA</button>
+            {/* </>
               :
               null
-            }
+            } */}
           </>
           :
           <div className="cannot-mint">
