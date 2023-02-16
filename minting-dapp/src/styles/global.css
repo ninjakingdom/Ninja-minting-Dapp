@@ -45,13 +45,13 @@ body {
 }
 
 .wrapper {
-  display: flex;
-  justify-content: center;
+  display: grid;
+  place-items: center;
 }
 
 .countdown-timer {
-  transform: translatey(150%);
-  width: 100%;
+  position: relative;
+  top: 50%;
 }
 
 .timer-items {
@@ -81,10 +81,7 @@ body {
 
 @media screen and (max-width: 680px) {
 
-  .countdown-timer {
-    transform: translatey(300%);
-    width: 100%;
-  }
+  .countdown-timer {}
 
   .timer-items {
     display: inline-block;

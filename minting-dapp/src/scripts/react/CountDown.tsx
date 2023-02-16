@@ -6,7 +6,7 @@ const CountDown = () => {
   const [seconds, setSeconds] = useState(0);
 
   useEffect(() => {
-    const target = new Date("17 February 2023 23:59 GMT+8");
+    const target = new Date("16 February 2023 23:59 GMT+8");
 
     const interval = setInterval(() => {
       const now = new Date();
@@ -49,25 +49,23 @@ const CountDown = () => {
         <img className='logo' src='logo.png'></img>
       </a>
       <div className="wrapper">
-        <div className="width">
-          <div className='countdown-timer'>
-            <div className="timer-items">
-              <div className="hours">
-                <h3>{hours}</h3>
-                <span>Hours</span>
-              </div>
+        <div className='countdown-timer'>
+          <div className="timer-items">
+            <div className="hours">
+              <h3>{hours}</h3>
+              <span>Hours</span>
             </div>
-            <div className="timer-items">
-              <div className="minutes">
-                <h3>{minutues}</h3>
-                <span>Minutes</span>
-              </div>
+          </div>
+          <div className="timer-items">
+            <div className="minutes">
+              <h3>{minutues}</h3>
+              <span>Minutes</span>
             </div>
-            <div className="timer-items">
-              <div className="seconds">
-                <h3>{seconds}</h3>
-                <span>Seconds</span>
-              </div>
+          </div>
+          <div className="timer-items">
+            <div className="seconds">
+              <h3>{seconds}</h3>
+              <span>Seconds</span>
             </div>
           </div>
         </div>
