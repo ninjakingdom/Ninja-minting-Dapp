@@ -72,7 +72,6 @@ export default class MintWidget extends React.Component<Props, State> {
       <>
         {this.canMint() ?
           <>
-            {/* <div className={`mint-widget ${this.props.loading ? 'animate-pulse saturate-0 pointer-events-none' : ''}`}> */}
             {this.props.isUserInWhitelist ?
               <>
                 <div className="pricetag">
@@ -83,7 +82,6 @@ export default class MintWidget extends React.Component<Props, State> {
                   <button tabIndex={2} className="mintTwo" disabled={this.props.loading} onClick={() => this.mint2()}>2</button>
                 </div>
                 <button className="mintbutton" disabled={this.props.loading} onClick={() => this.mint()}>MINT {this.state.mintAmount} NINJA</button>
-                {/* </div> */}
               </>
               :
               null
