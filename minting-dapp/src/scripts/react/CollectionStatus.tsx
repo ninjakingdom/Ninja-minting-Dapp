@@ -49,7 +49,7 @@ export default class CollectionStatus extends React.Component<Props, State> {
             {this.props.errorMessage ?
               <>
                 <div className="error-message">
-                  <p>{this.props.errorMessage}</p></div>
+                  <p>{this.props.errorMessage?.toString().slice(0, 25)}... (Please check MetaMask for the full error)</p></div>
               </>
               :
               null
@@ -57,7 +57,7 @@ export default class CollectionStatus extends React.Component<Props, State> {
             <h1 className='select'>SELECT THE NUMBER OF NINJAS TO MINT</h1>
             <div className="supply">
               <span className="label">REMAINING NINJAS: </span>
-              <span style={{ color: "#E42222" }}>{this.props.totalSupply.toString()}</span> / {this.props.maxSupply.toString()} SUPPLY
+              <span style={{ color: "#E42222" }}>{Number(this.props.maxSupply.toString()) - Number(this.props.totalSupply.toString())}</span> / {this.props.maxSupply.toString()} SUPPLY
             </div>
           </>
         }

@@ -45,13 +45,13 @@ body {
 }
 
 .wrapper {
+  height: 85%;
   display: grid;
   place-items: center;
 }
 
 .countdown-timer {
   position: relative;
-  top: 50%;
 }
 
 .timer-items {
@@ -76,7 +76,6 @@ body {
   font-size: 20px;
   font-weight: 500;
   color: #E42222;
-  font-family: 'Racing Sans One';
 }
 
 @media screen and (max-width: 680px) {
@@ -104,6 +103,7 @@ body {
     font-size: 15px;
     font-weight: 500;
   }
+
 }
 
 .live-soon {
