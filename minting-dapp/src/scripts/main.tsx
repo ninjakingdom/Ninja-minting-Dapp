@@ -8,10 +8,9 @@ if (document.title === '') {
   document.title = CollectionConfig.tokenName;
 }
 
-
 document.addEventListener('DOMContentLoaded', async () => {
   ReactDOM.render(<>
-    <CountDown />
-    {/* <Dapp /> */}
+    {/* <CountDown /> */}
+    <Dapp />
   </>, document.getElementById('minting-dapp'));
 });

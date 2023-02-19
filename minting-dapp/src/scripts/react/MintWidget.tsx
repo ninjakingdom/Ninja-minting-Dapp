@@ -1,6 +1,7 @@
 import { utils, BigNumber } from 'ethers';
 import React from 'react';
 import NetworkConfigInterface from '../../../../smart-contract/lib/NetworkConfigInterface';
+import $ from "jquery";
 
 interface Props {
   networkConfig: NetworkConfigInterface;
@@ -68,6 +69,10 @@ export default class MintWidget extends React.Component<Props, State> {
   }
 
   render() {
+    $('button').on('click', function () {
+      $('button').removeClass('selected');
+      $(this).addClass('selected');
+    });
     return (
       <>
         {this.canMint() ?
@@ -78,8 +83,13 @@ export default class MintWidget extends React.Component<Props, State> {
               <strong>PRICE:</strong> {utils.formatEther(this.props.tokenPrice.mul(this.state.mintAmount))} ETH
             </div>
             <div className="controls">
-              <button tabIndex={1} className="mintOne" disabled={this.props.loading} onClick={() => this.mint1()}><a>1</a></button>
-              <button tabIndex={2} className="mintTwo" disabled={this.props.loading} onClick={() => this.mint2()}>2</button>
+              {/* <button tabIndex={1} className="mintOne" disabled={this.props.loading} onClick={() => this.mint1()}><a>1</a></button>
+              <button tabIndex={2} className="mintTwo" disabled={this.props.loading} onClick={() => this.mint2()}>2</button> */}
+
+
+              <button tabIndex={100} ref='#target1' id='target1' className="mintOne-public" disabled={this.props.loading} onClick={() => this.mint1()}><a>1</a></button>
+              <button tabIndex={101} ref='#target2' id='target2' className="mintTwo-public" disabled={this.props.loading} onClick={() => this.mint2()}>2</button>
+              <button tabIndex={102} ref='#target1' id='target3' className="mintThree-public" disabled={this.props.loading} onClick={() => this.mint3()}>3</button>
             </div>
             <button className="mintbutton" disabled={this.props.loading} onClick={() => this.mint()}>MINT {this.state.mintAmount} NINJA</button>
             {/* </>

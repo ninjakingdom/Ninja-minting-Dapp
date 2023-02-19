@@ -80,8 +80,6 @@ body {
 
 @media screen and (max-width: 680px) {
 
-  .countdown-timer {}
-
   .timer-items {
     display: inline-block;
     background-color: rgb(41, 41, 41);
@@ -329,7 +327,55 @@ body {
   font-family: 'Racing Sans One';
 }
 
-button:focus {
+.mintOne-public {
+  position: absolute;
+  top: 55%;
+  left: 50%;
+  transform: translate(-180%, -50%);
+  height: 80px;
+  width: 80px;
+  background-color: white;
+  border-radius: 50%;
+  border-style: none;
+  display: inline-block;
+  color: black;
+  font-size: 30px;
+  font-family: 'Racing Sans One';
+}
+
+.mintTwo-public {
+  position: absolute;
+  top: 55%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  height: 80px;
+  width: 80px;
+  background-color: white;
+  border-radius: 50%;
+  border-style: none;
+  display: inline-block;
+  color: black;
+  font-size: 30px;
+  font-family: 'Racing Sans One';
+}
+
+.mintThree-public {
+  position: absolute;
+  top: 55%;
+  left: 50%;
+  transform: translate(80%, -50%);
+  height: 80px;
+  width: 80px;
+  background-color: white;
+  border-radius: 50%;
+  border-style: none;
+  display: inline-block;
+  color: black;
+  font-size: 30px;
+  font-family: 'Racing Sans One';
+}
+
+button.selected {
   background-color: #E42222;
 }
 
@@ -445,6 +491,11 @@ button:focus {
   font-family: 'Racing Sans One';
   margin: auto;
   padding: 10px;
-  width: 300px;
+  width: 275px;
   height: 25px;
+}
+
+.img-text {
+  display: flex;
+  align-items: center;
 }

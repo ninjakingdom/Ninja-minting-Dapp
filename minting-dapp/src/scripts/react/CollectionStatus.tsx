@@ -1,5 +1,4 @@
-import React, { useEffect, useState } from 'react';
-import Whitelist from '../lib/Whitelist';
+import React from 'react';
 
 interface Props {
   userAddress: string | null;
@@ -42,7 +41,7 @@ export default class CollectionStatus extends React.Component<Props, State> {
           <> */}
         {this.props.isPaused ?
           <>
-            <h1 className='WL-fail'><strong className='text'>Switching MetaMask accounts...</strong></h1>
+            {/* f */}
           </>
           :
           <>

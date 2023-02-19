@@ -94,21 +94,10 @@ export default class Dapp extends React.Component<Props, State> {
       const transaction = await this.contract.mint(amount, { value: this.state.tokenPrice.mul(amount) });
       this.setState({ loading: true });
 
-      // toast.info(<>
-      //   Transaction sent! Please wait...<br />
-      //   <a href={this.generateTransactionUrl(transaction.hash)} target="_blank" rel="noopener">View on {this.state.networkConfig.blockExplorer.name}</a>
-      // </>);
-
       let tnxHash = this.generateTransactionUrl(transaction.hash).toString()
-
       this.setState({ tnxHashes: tnxHash })
 
       const receipt = await transaction.wait();
-
-      // toast.success(<>
-      //   Success!<br />
-      //   <a href={this.generateTransactionUrl(receipt.transactionHash)} target="_blank" rel="noopener">View on {this.state.networkConfig.blockExplorer.name}</a>
-      // </>);
 
       let tnxHashReceipt = this.generateTransactionUrl(receipt.transactionHash).toString()
       this.setState({ tnxHashReceipts: tnxHashReceipt })
@@ -126,17 +115,13 @@ export default class Dapp extends React.Component<Props, State> {
       const transaction = await this.contract.whitelistMint(amount, Whitelist.getProofForAddress(this.state.userAddress!), { value: this.state.tokenPrice.mul(amount) });
       this.setState({ loading: true });
 
-      // toast.info(<>
-      //   Transaction sent! Please wait...<br />
-      //   <a href={this.generateTransactionUrl(transaction.hash)} target="_blank" rel="noopener">View on {this.state.networkConfig.blockExplorer.name}</a>
-      // </>);
+      let tnxHash = this.generateTransactionUrl(transaction.hash).toString()
+      this.setState({ tnxHashes: tnxHash })
 
       const receipt = await transaction.wait();
 
-      // toast.success(<>
-      //   Success!<br />
-      //   <a href={this.generateTransactionUrl(receipt.transactionHash)} target="_blank" rel="noopener">View on {this.state.networkConfig.blockExplorer.name}</a>
-      // </>);
+      let tnxHashReceipt = this.generateTransactionUrl(receipt.transactionHash).toString()
+      this.setState({ tnxHashReceipts: tnxHashReceipt })
 
       this.refreshContractState();
       this.setState({ mintSuccess: true });
@@ -219,7 +204,7 @@ export default class Dapp extends React.Component<Props, State> {
                             WELCOME TO THE NINJA KINGDOM!
                           </h1>
                           <a className='ethscan' href={this.state.tnxHashReceipts} target="_blank" rel="noopener">VIEW ETHERSCAN</a>
-                          <a className='jonin' >CLAIM YOUR JŌNIN ROLE</a>
+                          <a className='jonin' href="https://discord.gg/theninjakingdom" target="_blank" rel="noopener"><div className='img-text'><img src='discord.png' style={{ maxWidth: "100%", maxHeight: "100%", paddingRight: "20px" }} />CLAIM YOUR JŌNIN ROLE</div></a>
                         </>
                         :
                         <>
@@ -261,14 +246,15 @@ export default class Dapp extends React.Component<Props, State> {
                         />
                         :
                         <div className="WL-fail">
-                          <h2>The Ninja's have been <strong>sold out</strong>!</h2>
-                          <h3>You can visit our collection in <a href={this.generateMarketplaceUrl()} target="_blank">{CollectionConfig.marketplaceConfig.name}</a>.</h3>
+                          <h2 className='text'>The Ninja's have been <strong>sold out</strong>!</h2>
+                          <h3 className='text'>You can visit our collection in <a href={this.generateMarketplaceUrl()} target="_blank">{CollectionConfig.marketplaceConfig.name}</a>.</h3>
                         </div>
                       }
                     </>
                   }
                 </>
                 :
+                // <div className='WL-fail text'> Something went wrong with your web3 provider. Please try again with MetaMask </div>
                 null
               }
             </>
