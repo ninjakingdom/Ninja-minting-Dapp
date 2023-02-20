@@ -8,7 +8,7 @@ import "@openzeppelin/contracts/utils/cryptography/MerkleProof.sol";
 import "@openzeppelin/contracts/security/ReentrancyGuard.sol";
 import "@openzeppelin/contracts/token/common/ERC2981.sol";
 
-contract TheNinjaKingdom is
+contract TheNinjaKingdomOfficial is
     ERC721AQueryable,
     ERC2981,
     Ownable,
@@ -26,7 +26,7 @@ contract TheNinjaKingdom is
     uint256 public cost;
     uint256 public maxSupply;
     uint256 public maxMintAmountPerTx;
-    uint256 public maxMintAmount = 2;
+    uint256 public maxMintAmount = 20;
 
     bool public paused = false;
     bool public whitelistMintEnabled = true;

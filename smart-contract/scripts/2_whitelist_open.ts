@@ -34,10 +34,10 @@ async function main() {
   }
 
   // Update max mint amount per acc
-  if (!await (await contract.maxMintAmount()).eq(CollectionConfig.publicSale.maxMintAmountPerTx)) {
-    console.log(`Updating the max mint amount to ${CollectionConfig.publicSale.maxMintAmountPerTx}...`);
+  if (!await (await contract.maxMintAmount()).eq(CollectionConfig.whitelistSale.maxMintAmountPerTx)) {
+    console.log(`Updating the max mint amount to ${CollectionConfig.whitelistSale.maxMintAmountPerTx}...`);
 
-    await (await contract.setmaxMintAmount(CollectionConfig.publicSale.maxMintAmountPerTx)).wait();
+    await (await contract.setmaxMintAmount(CollectionConfig.whitelistSale.maxMintAmountPerTx)).wait();
   }
 
   // Update root hash (if changed)
