@@ -48,7 +48,7 @@ export default class MintWidget extends React.Component<Props, State> {
 
   private mint2(): void {
     this.setState({
-      mintAmount: 20,
+      mintAmount: 2,
     });
   }
 
