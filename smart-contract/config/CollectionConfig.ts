@@ -10,20 +10,20 @@ const CollectionConfig: CollectionConfigInterface = {
   // yarn rename-contract NEW_CONTRACT_NAME
   // Please DO NOT change it manually!
   contractName: 'TheNinjaKingdomOfficial',
-  tokenName: 'The Ninja Kingdom Official',
+  tokenName: 'The Ninja',
   tokenSymbol: 'TNJK',
-  hiddenMetadataUri: 'ipfs://QmRe52FPcX3SiNLgShWeYZByw8YUzFCeohZrVc2gjaE5kk/hidden.json',
-  maxSupply: 100,
+  hiddenMetadataUri: 'QmVoQZAkppWrhYZ3FAnZSW14gn6DDAL73jL3gdWa9Mpx7j/hidden.json',
+  maxSupply: 6000,
   whitelistSale: {
-    price: 0.001,
+    price: 0,
     maxMintAmountPerTx: 2,
   },
   preSale: {
-    price: 0.002,
+    price: 0.065,
     maxMintAmountPerTx: 3,
   },
   publicSale: {
-    price: 0.002,
+    price: 0.065,
     maxMintAmountPerTx: 3,
   },
   contractAddress: "0x85bB3b8D2597729DAC4a58c155FF0a5d83A0caA5",

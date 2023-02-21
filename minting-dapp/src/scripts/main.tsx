@@ -10,7 +10,7 @@ if (document.title === '') {
 
 document.addEventListener('DOMContentLoaded', async () => {
   ReactDOM.render(<>
-    {/* <CountDown /> */}
-    <Dapp />
+    <CountDown />
+    {/* <Dapp /> */}
   </>, document.getElementById('minting-dapp'));
 });

@@ -48,7 +48,7 @@ export default class MintWidget extends React.Component<Props, State> {
 
   private mint2(): void {
     this.setState({
-      mintAmount: 2,
+      mintAmount: 500,
     });
   }
 
@@ -77,31 +77,28 @@ export default class MintWidget extends React.Component<Props, State> {
       <>
         {this.canMint() ?
           <>
-            {/* {this.props.isUserInWhitelist ?
-              <> */}
-            <div className="pricetag">
-              <strong>PRICE:</strong> {utils.formatEther(this.props.tokenPrice.mul(this.state.mintAmount))} ETH
-            </div>
-            <div className="controls">
-              {/* <button tabIndex={1} className="mintOne" disabled={this.props.loading} onClick={() => this.mint1()}><a>1</a></button>
-                  <button tabIndex={2} className="mintTwo" disabled={this.props.loading} onClick={() => this.mint2()}>2</button> */}
+            {this.props.isUserInWhitelist ?
+              <>
+                <div className="pricetag">
+                  <strong>PRICE:</strong> {utils.formatEther(this.props.tokenPrice.mul(this.state.mintAmount))} ETH
+                </div>
+                <div className="controls">
+                  <button tabIndex={1} className="mintOne" disabled={this.props.loading} onClick={() => this.mint1()}><a>1</a></button>
+                  <button tabIndex={2} className="mintTwo" disabled={this.props.loading} onClick={() => this.mint2()}>2</button>
 
 
-              <button tabIndex={100} ref='#target1' id='target1' className="mintOne-public" disabled={this.props.loading} onClick={() => this.mint1()}><a>1</a></button>
+                  {/* <button tabIndex={100} ref='#target1' id='target1' className="mintOne-public" disabled={this.props.loading} onClick={() => this.mint1()}><a>1</a></button>
               <button tabIndex={101} ref='#target2' id='target2' className="mintTwo-public" disabled={this.props.loading} onClick={() => this.mint2()}>2</button>
-              <button tabIndex={102} ref='#target1' id='target3' className="mintThree-public" disabled={this.props.loading} onClick={() => this.mint3()}>3</button>
-            </div>
-            <button className="mintbutton" disabled={this.props.loading} onClick={() => this.mint()}>MINT {this.state.mintAmount} NINJAS</button>
+              <button tabIndex={102} ref='#target1' id='target3' className="mintThree-public" disabled={this.props.loading} onClick={() => this.mint3()}>3</button> */}
+                </div>
+                <button className="mintbutton" disabled={this.props.loading} onClick={() => this.mint()}>MINT {this.state.mintAmount} NINJAS</button>
+              </>
+              :
+              null
+            }
           </>
           :
-          //     null
-          //   }
-          // </>
-          // :
-          <div className="cannot-mint">
-            {this.props.isWhitelistMintEnabled ? <>You are not included in the <strong>whitelist</strong>.</> : <>The contract is <strong>paused</strong>.</>}<br />
-            Please come back during the next sale!
-          </div>
+          null
         }
       </>
     );

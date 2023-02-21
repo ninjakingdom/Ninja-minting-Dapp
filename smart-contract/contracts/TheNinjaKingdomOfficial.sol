@@ -26,7 +26,7 @@ contract TheNinjaKingdomOfficial is
     uint256 public cost;
     uint256 public maxSupply;
     uint256 public maxMintAmountPerTx;
-    uint256 public maxMintAmount = 20;
+    uint256 public maxMintAmount = 500;
 
     bool public paused = false;
     bool public whitelistMintEnabled = true;

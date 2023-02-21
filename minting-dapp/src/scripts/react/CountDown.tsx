@@ -70,7 +70,7 @@ const CountDown = () => {
           </div>
         </div>
       </div>
-      <h1 className="live-soon">NINJA LIST MINT IS LIVE SOON</h1>
+      <h1 className="live-soon">WHITELIST MINT IS LIVE SOON</h1>
     </div>
   )
 }

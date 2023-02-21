@@ -180,7 +180,7 @@ export default class Dapp extends React.Component<Props, State> {
           <a href='https://theninjakingdom.com' target="_blank" rel="noopener" >
             <img className='logo' src='logo.png'></img>
           </a>
-          <h1 className='NL-mint'>NINJA LIST MINT</h1>
+          <h1 className='NL-mint'>WHITLELIST MINT</h1>
 
           {this.state.errorMetaMessage ? <div className="error-message"><strong>{this.state.errorMetaMessage}</strong></div> : null}
 
